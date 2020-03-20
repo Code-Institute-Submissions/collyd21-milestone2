@@ -2,23 +2,23 @@
     <head>
         <title>Takeaway Decider Wheel</title>
         <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="canvasContainer">
-            <canvas id="canvas" width="500" height="500">
-                Canvas not supported, please user another browser.
+            <canvas id="canvas" width="500" height="500"> <!-- Wheel container size -->
             </canvas>
-            <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" />
+            <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" /> <!-- Pointer image -->
         </div>
         <script>
     let theWheel = new Winwheel({
-                'numSegments' : 6,
-                'textAlignment'  : 'inner',
-                'outerRadius'   : 200,
-                'pointerAngle' : 90,
-                'innerRadius'   : 40,
-                'segments'    :
+                'numSegments' : 6, // Number of segments.
+                'textAlignment'  : 'inner', // Text alignment.
+                'outerRadius'   : 200, // Radius of outer circle.
+                'pointerAngle' : 90, // Degree angle that pointer sits at.
+                'innerRadius'   : 40, // Radius of inner circle.
+                'segments'    : // Individual segment styling.
                 [
                     {'fillStyle' : '#eeefff', 'text' : 'Segment 1'},
                     {'fillStyle' : '#89f26e', 'text' : 'Segment 2'},
@@ -28,16 +28,44 @@
                     {'fillStyle' : '#e77811', 'text' : 'Segment 6'}
                 ],
                
-            'animation' :                   // Note animation properties passed in constructor parameters.
-    {
-        'type'     : 'spinToStop',  // Type of animation.
-        'duration' : 5,             // How long the animation is to take in seconds.
-        'spins'    : 8,              // The number of complete 360 degree rotations the wheel is to do.
-    // Remember to do something after the animation has finished specify callback function.
+            'animation' :
+            {
+        'type'     : 'spinToStop',  // Animation set to spin and then stop.
+        'duration' : 5,             // Animation  time in seconds.
+        'spins'    : 8,              // Number of complete revolutions of the wheel.
+        'callbackFinished' : 'winAnimation()', // After spinning finishes, play winning animation
         }
     });
+ 
+    function winAnimation()
+    {
+        let winningSegmentNumber = theWheel.getIndicatedSegmentNumber(); // Get the number of the winning segment.
+ 
+        for (let i = 1; i < theWheel.segments.length; i ++) 
+        {
+            theWheel.segments[i].fillStyle = 'grey';                    // For loop and change fillStyle of all segments to grey.
+        }
+
+        theWheel.segments[winningSegmentNumber].fillStyle = 'gold';   // Change winning segment colour.
+ 
+        theWheel.draw();                                                // Call draw function to render changes.
+
+    }
+
+    function resetWheel()
+            {
+                theWheel.stopAnimation();  // Stop the animation, false as param so does not call callback function.
+                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+                theWheel.segments[1].fillStyle = '#eeefff';
+                theWheel.segments[2].fillStyle = '#89f26e',
+                theWheel.segments[3].fillStyle = '#7de6ef',
+                theWheel.segments[4].fillStyle = '#e7706f',
+                theWheel.segments[5].fillStyle = '#eff111',
+                theWheel.segments[6].fillStyle = '#e77811';
+                theWheel.draw();
+            }
 </script>
-<button onClick="theWheel.startAnimation();">Spin the Wheel</button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+<button onClick="theWheel.startAnimation();">Spin the Wheel</button> <!-- Click to spin wheel -->
+<button onClick="resetWheel();">Reset</button>
     </body>
 </html>
