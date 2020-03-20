@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Takeaway Decider Wheel</title>
-        <script src='Winwheel.js'></script>
+        <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -9,21 +9,35 @@
             <canvas id="canvas" width="500" height="500">
                 Canvas not supported, please user another browser.
             </canvas>
-            <img id="prizePointer" src="assets/images/prizepointer.png" alt="V" />
+            <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" />
         </div>
         <script>
     let theWheel = new Winwheel({
-        'numSegments' : 6,
-        'segments'    :
-        [
-            {'fillStyle' : '#eeefff', 'text' : 'Segment 1'},
+                'numSegments' : 6,
+                'textAlignment'  : 'inner',
+                'outerRadius'   : 200,
+                'pointerAngle' : 90,
+                'innerRadius'   : 40,
+                'segments'    :
+                [
+                    {'fillStyle' : '#eeefff', 'text' : 'Segment 1'},
                     {'fillStyle' : '#89f26e', 'text' : 'Segment 2'},
                     {'fillStyle' : '#7de6ef', 'text' : 'Segment 3'},
                     {'fillStyle' : '#e7706f', 'text' : 'Segment 4'},
                     {'fillStyle' : '#eff111', 'text' : 'Segment 5'},
                     {'fillStyle' : '#e77811', 'text' : 'Segment 6'}
-        ]
+                ],
+               
+            'animation' :                   // Note animation properties passed in constructor parameters.
+    {
+        'type'     : 'spinToStop',  // Type of animation.
+        'duration' : 5,             // How long the animation is to take in seconds.
+        'spins'    : 8,              // The number of complete 360 degree rotations the wheel is to do.
+    // Remember to do something after the animation has finished specify callback function.
+        }
     });
 </script>
+<button onClick="theWheel.startAnimation();">Spin the Wheel</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
     </body>
 </html>
