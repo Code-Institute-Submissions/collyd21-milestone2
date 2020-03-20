@@ -1,0 +1,10 @@
+#canvas {
+    z-index: 1;
+}
+ 
+#prizePointer {
+    position: absolute;
+    left: 510px;
+    top: 215px;
+    z-index: 999;
+}

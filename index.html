@@ -1,12 +1,16 @@
 <html>
     <head>
-        <title>My Winning Wheel</title>
+        <title>Takeaway Decider Wheel</title>
         <script src='Winwheel.js'></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <canvas id='canvas' width='500' height='500'>
-            Canvas not supported, use another browser.
-        </canvas>
+        <div id="canvasContainer">
+            <canvas id="canvas" width="500" height="500">
+                Canvas not supported, please user another browser.
+            </canvas>
+            <img id="prizePointer" src="assets/images/prizepointer.png" alt="V" />
+        </div>
         <script>
     let theWheel = new Winwheel({
         'numSegments' : 6,
