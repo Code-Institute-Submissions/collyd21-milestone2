@@ -27,7 +27,14 @@
                     {'fillStyle' : '#eff111', 'text' : 'Segment 5'},
                     {'fillStyle' : '#e77811', 'text' : 'Segment 6'}
                 ],
-               
+               'pins' :    // Specify pin parameters.
+        {
+            'number'      : 24,  // Number of pins.
+            'outerRadius' : 5,  // Radius of each pin.
+            'margin'      : 5,  // Margin ofpin from edge of wheel.
+            'fillStyle'   : '#636363', // Fill colour of pin.
+            'strokeStyle' : '#ffffff' // Border colour of pin.
+        },
             'animation' :
             {
         'type'     : 'spinToStop',  // Animation set to spin and then stop.
@@ -36,25 +43,24 @@
         'callbackFinished' : 'winAnimation()', // After spinning finishes, play winning animation
         }
     });
- 
-    function winAnimation()
+
+        function winAnimation()
     {
-        let winningSegmentNumber = theWheel.getIndicatedSegmentNumber(); // Get the number of the winning segment.
+        
+            let winningSegmentNumber = theWheel.getIndicatedSegmentNumber(); // Get the number of the winning segment.
  
         for (let i = 1; i < theWheel.segments.length; i ++) 
         {
             theWheel.segments[i].fillStyle = 'grey';                    // For loop and change fillStyle of all segments to grey.
-        }
+}
 
         theWheel.segments[winningSegmentNumber].fillStyle = 'gold';   // Change winning segment colour.
  
         theWheel.draw();                                                // Call draw function to render changes.
-
-    }
-
+            }
     function resetWheel()
             {
-                theWheel.stopAnimation();  // Stop the animation, false as param so does not call callback function.
+                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
                 theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                 theWheel.segments[1].fillStyle = '#eeefff';
                 theWheel.segments[2].fillStyle = '#89f26e',
@@ -62,7 +68,7 @@
                 theWheel.segments[4].fillStyle = '#e7706f',
                 theWheel.segments[5].fillStyle = '#eff111',
                 theWheel.segments[6].fillStyle = '#e77811';
-                theWheel.draw();
+                theWheel.draw();                // Call draw function to render changes.
             }
 </script>
 <button onClick="theWheel.startAnimation();">Spin the Wheel</button> <!-- Click to spin wheel -->
