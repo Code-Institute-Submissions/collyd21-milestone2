@@ -38,26 +38,28 @@
             'animation' :
             {
         'type'     : 'spinToStop',  // Animation set to spin and then stop.
-        'duration' : 5,             // Animation  time in seconds.
-        'spins'    : 8,              // Number of complete revolutions of the wheel.
+        'duration' : 4,             // Animation  time in seconds.
+        'spins'    : 6,              // Number of complete revolutions of the wheel.
         'callbackFinished' : 'winAnimation()', // After spinning finishes, play winning animation
         }
     });
 
         function winAnimation()
     {
-        
-            let winningSegmentNumber = theWheel.getIndicatedSegmentNumber(); // Get the number of the winning segment.
+            let winningSegment = theWheel.getIndicatedSegment();                // Get the text of the winning segment.
+            let winningSegmentNumber = theWheel.getIndicatedSegmentNumber();    // Get the number of the winning segment.
  
         for (let i = 1; i < theWheel.segments.length; i ++) 
         {
-            theWheel.segments[i].fillStyle = 'grey';                    // For loop and change fillStyle of all segments to grey.
+            theWheel.segments[i].fillStyle = 'grey';                     // For loop and change fillStyle of all segments to grey.
 }
 
-        theWheel.segments[winningSegmentNumber].fillStyle = 'gold';   // Change winning segment colour.
+        theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
  
         theWheel.draw();                                                // Call draw function to render changes.
-            }
+           console.log(winningSegment.text);                           // Console logs the text of winning segment.
+        }
+
     function resetWheel()
             {
                 theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
