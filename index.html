@@ -1,9 +1,11 @@
-<html>
-    <head>
+<!DOCTYPE html>
+    <html lang="en">
         <title>Takeaway Decider Wheel</title>
         <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
-        <link rel="stylesheet" href="style.css">
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NYWqZ40UfU1uCPpWqr-PCeYhtlA1KVE&callback=initMap&libraries=geometry,places"></script>
+    <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="canvasContainer">
@@ -11,7 +13,52 @@
             </canvas>
             <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" /> <!-- Pointer image -->
         </div>
+        <button onClick="theWheel.startAnimation()">Spin the Wheel</button> <!-- Click to spin wheel -->
+<button onClick="resetWheel();">Reset</button>
+<div id="map" style="display: none;"></div>
         <script>
+
+
+    var map;     // Declare variables.
+    var service;
+    var infowindow;
+
+
+function initMap() {                                                         // Initialise map to home location(ratoath).
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 15, center: {lat: 53.508709, lng: -6.460100},});
+
+  var request = {                                                           
+    location: {lat: 53.508709, lng: -6.460100},                             // Coordinates of results centre point.
+    radius: '10',                                                           // Radius in from results centre point.
+    query: 'pizza',                                                       // Text to be searched.
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
+}
+
+function callback(results, status) {                                        
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < 5; i++) {
+      var place = results[i];                                               // For loop through results.
+      addMarker(place);                                             // Add make for each result.
+      console.log(results[i]);                                              // Log results to console.
+                                           
+    }
+  }
+}
+ 
+ function addMarker(place) {
+
+    new google.maps.Marker({
+        position: place.location,
+        map: map,
+    });
+}
+
+
+
     let theWheel = new Winwheel({
                 'numSegments' : 6, // Number of segments.
                 'textAlignment'  : 'inner', // Text alignment.
@@ -20,12 +67,12 @@
                 'innerRadius'   : 40, // Radius of inner circle.
                 'segments'    : // Individual segment styling.
                 [
-                    {'fillStyle' : '#eeefff', 'text' : 'Segment 1'},
-                    {'fillStyle' : '#89f26e', 'text' : 'Segment 2'},
-                    {'fillStyle' : '#7de6ef', 'text' : 'Segment 3'},
-                    {'fillStyle' : '#e7706f', 'text' : 'Segment 4'},
-                    {'fillStyle' : '#eff111', 'text' : 'Segment 5'},
-                    {'fillStyle' : '#e77811', 'text' : 'Segment 6'}
+                    {'fillStyle' : '#eeefff', 'text' : 'Burger'},
+                    {'fillStyle' : '#89f26e', 'text' : 'pizza'},
+                    {'fillStyle' : '#7de6ef', 'text' : 'Chips'},
+                    {'fillStyle' : '#e7706f', 'text' : 'Chinese'},
+                    {'fillStyle' : '#eff111', 'text' : 'Indian'},
+                    {'fillStyle' : '#e77811', 'text' : 'Pizza'}
                 ],
                'pins' :    // Specify pin parameters.
         {
@@ -41,39 +88,40 @@
         'duration' : 4,             // Animation  time in seconds.
         'spins'    : 6,              // Number of complete revolutions of the wheel.
         'callbackFinished' : 'winAnimation()', // After spinning finishes, play winning animation
+        'callbackFinished' : 'mapView()'
         }
     });
 
         function winAnimation()
-    {
+        {
             let winningSegment = theWheel.getIndicatedSegment();                // Get the text of the winning segment.
             let winningSegmentNumber = theWheel.getIndicatedSegmentNumber();    // Get the number of the winning segment.
  
-        for (let i = 1; i < theWheel.segments.length; i ++) 
-        {
-            theWheel.segments[i].fillStyle = 'grey';                     // For loop and change fillStyle of all segments to grey.
-}
+            for (let i = 1; i < theWheel.segments.length; i ++) 
+            {
+                theWheel.segments[i].fillStyle = 'grey';                     // For loop and change fillStyle of all segments to grey.
+            }
 
-        theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
+            theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
  
-        theWheel.draw();                                                // Call draw function to render changes.
-           console.log(winningSegment.text);                           // Console logs the text of winning segment.
+            theWheel.draw();                                                // Call draw function to render changes.
+
+            console.log(winningSegment.text);                           // Console logs the text of winning segment.
         }
 
-    function resetWheel()
-            {
-                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
-                theWheel.segments[1].fillStyle = '#eeefff';
-                theWheel.segments[2].fillStyle = '#89f26e',
-                theWheel.segments[3].fillStyle = '#7de6ef',
-                theWheel.segments[4].fillStyle = '#e7706f',
-                theWheel.segments[5].fillStyle = '#eff111',
-                theWheel.segments[6].fillStyle = '#e77811';
-                theWheel.draw();                // Call draw function to render changes.
-            }
+        function resetWheel()
+        {
+            theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
+            theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
+            theWheel.segments[1].fillStyle = '#eeefff';
+            theWheel.segments[2].fillStyle = '#89f26e',
+            theWheel.segments[3].fillStyle = '#7de6ef',
+            theWheel.segments[4].fillStyle = '#e7706f',
+            theWheel.segments[5].fillStyle = '#eff111',
+            theWheel.segments[6].fillStyle = '#e77811';
+            theWheel.draw();                // Call draw function to render changes.
+        }
+            
 </script>
-<button onClick="theWheel.startAnimation();">Spin the Wheel</button> <!-- Click to spin wheel -->
-<button onClick="resetWheel();">Reset</button>
     </body>
 </html>
