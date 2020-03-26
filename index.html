@@ -23,6 +23,14 @@
     var service;
     var infowindow;
 
+function mapView() {
+  var mapView = document.getElementById("map");
+  if (mapView.style.display === "none") {
+    mapView.style.display = "block";
+  } else {
+    mapView.style.display = "none";
+  }
+}
 
 function initMap() {                                                         // Initialise map to home location(ratoath).
   var map = new google.maps.Map(
