@@ -95,8 +95,8 @@ function callback(results, status) {
         'type'     : 'spinToStop',  // Animation set to spin and then stop.
         'duration' : 4,             // Animation  time in seconds.
         'spins'    : 6,              // Number of complete revolutions of the wheel.
-        'callbackFinished' : 'winAnimation()', // After spinning finishes, play winning animation
-        'callbackFinished' : 'mapView()'
+        'callbackFinished' : 'winAnimation(), mapView()' // After spinning finishes, play winning animation
+        
         }
     });
 
@@ -128,6 +128,7 @@ function callback(results, status) {
             theWheel.segments[5].fillStyle = '#eff111',
             theWheel.segments[6].fillStyle = '#e77811';
             theWheel.draw();                // Call draw function to render changes.
+            mapView();                      // Reset map to hidden.
         }
             
 </script>
