@@ -13,8 +13,8 @@
             </canvas>
             <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" /> <!-- Pointer image -->
         </div>
-        <button onClick="theWheel.startAnimation()">Spin the Wheel</button> <!-- Click to spin wheel -->
-<button onClick="resetWheel();">Reset</button>
+        <button id="spinButton" style="display: inline;" onClick="spinClick(); theWheel.startAnimation(); initMap();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function resets map so new winning text search each time -->
+<button id="resetButton" style="display: none;" onClick="resetWheel();">Reset</button>
 <div id="map" style="display: none;"></div>
         <script>
 
@@ -23,7 +23,25 @@
     var service;
     var infowindow;
 
-function mapView() {
+function spinClick() {                                                        // Spin Button toggle on and off.
+  var spinClick = document.getElementById("spinButton");
+  if (spinButton.style.display === "inline") {
+    spinButton.style.display = "none";
+  } else {
+    spinButton.style.display = "inline";
+  }
+}
+
+function reset() {                                                        // Reset Button toggle on and off.
+  var reset = document.getElementById("resetButton");
+  if (resetButton.style.display === "none") {
+    resetButton.style.display = "block";
+  } else {
+    resetButton.style.display = "none";
+  }
+}
+
+function mapView() {                                                        // Map in view toggle on and off.
   var mapView = document.getElementById("map");
   if (mapView.style.display === "none") {
     mapView.style.display = "block";
@@ -39,7 +57,7 @@ function initMap() {                                                         // 
   var request = {                                                           
     location: {lat: 53.508709, lng: -6.460100},                             // Coordinates of results centre point.
     radius: '10',                                                           // Radius in from results centre point.
-    query: 'pizza',                                                       // Text to be searched.
+    query: [winningSegment.text],                                                       // Text to be searched.
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -50,14 +68,13 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < 5; i++) {
       var place = results[i];                                               // For loop through results.
-      addMarker(place);                                             // Add make for each result.
-      console.log(results[i]);                                              // Log results to console.
-                                           
+      createMarker(results[i]);                                             // Add maker for each result.
+      console.log(results[i]);                                              // Log results to console.                                    
     }
   }
 }
  
- function addMarker(place) {
+ function createMarker(place) {
 
     new google.maps.Marker({
         position: place.location,
@@ -95,15 +112,15 @@ function callback(results, status) {
         'type'     : 'spinToStop',  // Animation set to spin and then stop.
         'duration' : 4,             // Animation  time in seconds.
         'spins'    : 6,              // Number of complete revolutions of the wheel.
-        'callbackFinished' : 'winAnimation(), mapView()' // After spinning finishes, play winning animation
+        'callbackFinished' : 'winAnimation(), mapView()' // After spinning finishes, play winning animation & display map
         
         }
     });
 
         function winAnimation()
         {
-            let winningSegment = theWheel.getIndicatedSegment();                // Get the text of the winning segment.
-            let winningSegmentNumber = theWheel.getIndicatedSegmentNumber();    // Get the number of the winning segment.
+            var winningSegment = theWheel.getIndicatedSegment();                // Get the text of the winning segment.
+            var winningSegmentNumber = theWheel.getIndicatedSegmentNumber();    // Get the number of the winning segment.
  
             for (let i = 1; i < theWheel.segments.length; i ++) 
             {
@@ -113,8 +130,9 @@ function callback(results, status) {
             theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
  
             theWheel.draw();                                                // Call draw function to render changes.
-
+            reset();
             console.log(winningSegment.text);                           // Console logs the text of winning segment.
+            console.log(typeof winningSegment);
         }
 
         function resetWheel()
@@ -128,9 +146,11 @@ function callback(results, status) {
             theWheel.segments[5].fillStyle = '#eff111',
             theWheel.segments[6].fillStyle = '#e77811';
             theWheel.draw();                // Call draw function to render changes.
-            mapView();                      // Reset map to hidden.
-        }
-            
+            mapView();                      // Toggle mapView function to reset map to hidden.
+            spinClick();                    // Toggle Spin button to On.
+            reset();                        // Toggle Reset button to Off.
+            };
+              
 </script>
     </body>
 </html>
