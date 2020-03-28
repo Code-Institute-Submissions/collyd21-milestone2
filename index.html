@@ -6,22 +6,40 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NYWqZ40UfU1uCPpWqr-PCeYhtlA1KVE&callback=initMap&libraries=geometry,places"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div id="canvasContainer">
-            <canvas id="canvas" width="500" height="500"> <!-- Wheel container size -->
-            </canvas>
-            <img id="prizePointer" src="assets/images/prizepointer.png" alt="prize pointer" /> <!-- Pointer image -->
-        </div>
-        <button id="spinButton" style="display: inline;" onClick="spinClick(); theWheel.startAnimation(); initMap();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function resets map so new winning text search each time -->
-<button id="resetButton" style="display: none;" onClick="resetWheel();">Reset</button>
-<div id="map" style="display: none;"></div>
+        
+        <div class="container-fluid no-gutters">
+  <div class="row">
+    <div class="text-right col-2">
+    <button class="btn btn-success" id="spinButton" style="display: inline;" onClick="spinClick(); theWheel.startAnimation(); initMap();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
+    </div> <!-- Column 1-->
+    <div id="wheelCol" class="col-8">
+        <canvas id="canvas" text-align= "center" width="620" height="620"> 
+            </canvas> 
+        </div> <!-- Column 2-->
+    <div class="text-left col-2">
+    <button class="btn btn-danger" id="resetButton" style="display: none;" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
+    </div> <!-- Column 3-->
+        </div> <!-- Row 1-->
+        </div> <!-- Container 1-->    
+        <div class="container-fluid no-gutters">
+        <div class="row">
+        <div class="col" id="map" style="display: none;"></div>
+        </div> <!-- Column 4-->
+        </div>  <!-- Row 2-->
+        </div> <!-- Container 2-->
+        
         <script>
 
 
     var map;     // Declare variables.
     var service;
     var infowindow;
+var request;
+var markers = [];
 
 function spinClick() {                                                        // Spin Button toggle on and off.
   var spinClick = document.getElementById("spinButton");
@@ -57,7 +75,7 @@ function initMap() {                                                         // 
   var request = {                                                           
     location: {lat: 53.508709, lng: -6.460100},                             // Coordinates of results centre point.
     radius: '10',                                                           // Radius in from results centre point.
-    query: [winningSegment.text],                                                       // Text to be searched.
+    query: ['winningSegment.text'],                                                       // Text to be searched.
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -73,6 +91,8 @@ function callback(results, status) {
     }
   }
 }
+  
+
  
  function createMarker(place) {
 
@@ -85,12 +105,14 @@ function callback(results, status) {
 
 
     let theWheel = new Winwheel({
-                'numSegments' : 6, // Number of segments.
-                'textAlignment'  : 'inner', // Text alignment.
-                'outerRadius'   : 200, // Radius of outer circle.
-                'pointerAngle' : 90, // Degree angle that pointer sits at.
-                'innerRadius'   : 40, // Radius of inner circle.
-                'segments'    : // Individual segment styling.
+                'numSegments' : 6,                              // Number of segments.
+                'textAlignment'  : 'centre',                     // Text alignment.
+                'textMargin' : 0,
+                'outerRadius'   : 300,                          // Radius of outer circle.
+                'pointerAngle' : 90,                            // Degree angle that pointer sits at.
+                'innerRadius'   : 40,                           // Radius of inner circle.
+                'textFontSize'  : 40,
+                'segments'    :                                 // Individual segment styling.
                 [
                     {'fillStyle' : '#eeefff', 'text' : 'Burger'},
                     {'fillStyle' : '#89f26e', 'text' : 'pizza'},
@@ -102,8 +124,8 @@ function callback(results, status) {
                'pins' :    // Specify pin parameters.
         {
             'number'      : 24,  // Number of pins.
-            'outerRadius' : 5,  // Radius of each pin.
-            'margin'      : 5,  // Margin ofpin from edge of wheel.
+            'outerRadius' : 8,  // Radius of each pin.
+            'margin'      : 10,  // Margin ofpin from edge of wheel.
             'fillStyle'   : '#636363', // Fill colour of pin.
             'strokeStyle' : '#ffffff' // Border colour of pin.
         },
@@ -128,11 +150,11 @@ function callback(results, status) {
             }
 
             theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
- 
+            theWheel.pins.fillStyle   = '#97EFE9';
             theWheel.draw();                                                // Call draw function to render changes.
             reset();
             console.log(winningSegment.text);                           // Console logs the text of winning segment.
-            console.log(typeof winningSegment);
+            console.log(typeof winningSegment.text);
         }
 
         function resetWheel()
@@ -140,11 +162,12 @@ function callback(results, status) {
             theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
             theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
             theWheel.segments[1].fillStyle = '#eeefff';
-            theWheel.segments[2].fillStyle = '#89f26e',
-            theWheel.segments[3].fillStyle = '#7de6ef',
-            theWheel.segments[4].fillStyle = '#e7706f',
-            theWheel.segments[5].fillStyle = '#eff111',
-            theWheel.segments[6].fillStyle = '#e77811';
+            theWheel.segments[2].fillStyle = '#89f26e';
+            theWheel.segments[3].fillStyle = '#7de6ef';
+            theWheel.segments[4].fillStyle = '#e7706f';
+            theWheel.segments[5].fillStyle = '#eff111';
+            theWheel.segments[6].fillStyle = '#e77811';       
+            theWheel.pins.fillStyle   = '#636363';
             theWheel.draw();                // Call draw function to render changes.
             mapView();                      // Toggle mapView function to reset map to hidden.
             spinClick();                    // Toggle Spin button to On.

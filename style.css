@@ -1,15 +1,26 @@
 #canvas {
-    z-index: 1;
-}
- 
-#prizePointer {
-    position: absolute;
-    left: 460px;
-    top: 215px;
-    z-index: 2;
-}
+        margin: 0;
+        background-image: url(assets/images/p-background.png);
+        background-repeat: no-repeat;   /* Ensure that background does not repeat */
+        background-position: center;
+	}
 
 #map {
-        height: 400px; 
+        margin: 0;
+        height: 600px; 
         width: 100%; 
-       }
+    }
+
+#wheelCol {
+text-align: center;
+}
+
+#spinButton {
+    text-align: right;
+    margin-top: 300px;
+}
+
+#resetButton {
+    text-align: left;
+    margin-top: 300px;
+}
