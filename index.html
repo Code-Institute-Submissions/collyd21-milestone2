@@ -4,7 +4,8 @@
         <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NYWqZ40UfU1uCPpWqr-PCeYhtlA1KVE&callback=initMap&libraries=geometry,places"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NYWqZ40UfU1uCPpWqr-PCeYhtlA1KVE&callback=initMap&libraries=geometry,places&amp"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -14,7 +15,7 @@
         <div class="container-fluid no-gutters">
   <div class="row">
     <div class="text-right col-2">
-    <button class="btn btn-success" id="spinButton" style="display: inline;" onClick="spinClick(); theWheel.startAnimation(); initMap();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
+    <button class="btn btn-success" id="spinButton" style="display: inline;" onClick="spinClick(); theWheel.startAnimation(); initGeolocation();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
     </div> <!-- Column 1-->
     <div id="wheelCol" class="col-8">
         <canvas id="canvas" text-align= "center" width="620" height="620"> 
@@ -32,14 +33,86 @@
         </div>  <!-- Row 2-->
         </div> <!-- Container 2-->
         
-        <script>
+        <script type="text/javascript">
+            function initGeolocation() {
+                if (navigator.geolocation) {
 
+                    // Call getCurrentPosition with success and failure callbacks
+                    navigator.geolocation.getCurrentPosition(success, fail);
+                } else {
+                    alert("Sorry, your browser does not support geolocation services.");
+                }
+            }
+            var map;
+            var service;
 
-    var map;     // Declare variables.
-    var service;
-    var infowindow;
-var request;
-var markers = [];
+            function handleSearchResults(results, status) {
+                console.log(results);
+
+                for (var i = 0; i < results, length; i++) {
+                    var marker = new google.maps.Marker({
+                        position: results(i).geometry.location,
+                        map: map
+                    });
+                }
+
+            }
+
+            function performSearch() {
+                var request = {
+                    bounds: map.getBounds(),
+                    name: ['winningSegment.text']
+                }
+
+                service.nearbySearch(request, handleSearchResults);
+            }
+
+            function success(position) {
+                var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); // Define the coordinates
+
+                var mapOptions = {
+                    zoom: 16,
+                    center: coords,
+                };
+
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);  // Create the map
+
+                var marker = new google.maps.Marker({                               // Place the initial marker
+                    position: coords,
+                    map: map,
+                    title: "Your current location!"
+                });
+                marker.setMap(map);
+
+                service = new google.maps.places.PlacesService(map);
+
+                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+            }
+
+            function fail() {                                                       // Could not obtain location
+            }
+
+            function placesRequest(title, latlng, radius, types, icon) {            //Request places from Google
+                var request = {                                                     //Parameters for our places request
+                    location: latlng,
+                    radius: radius,
+                    types: types
+                };
+                
+                var callPlaces = new google.maps.places.PlacesService(map);         //Make the service call to google
+                callPlaces.search(request, function (results, status) {
+                    $.each(results, function (i, place) {                           //trace what Google gives us back
+                        var placeLoc = place.geometry.location;
+                        var thisplace = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location,
+                            icon: icon,
+                            title: place.name
+                        });
+                    })
+                });
+
+            }
 
 function spinClick() {                                                        // Spin Button toggle on and off.
   var spinClick = document.getElementById("spinButton");
@@ -67,43 +140,6 @@ function mapView() {                                                        // M
     mapView.style.display = "none";
   }
 }
-
-function initMap() {                                                         // Initialise map to home location(ratoath).
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 15, center: {lat: 53.508709, lng: -6.460100},});
-
-  var request = {                                                           
-    location: {lat: 53.508709, lng: -6.460100},                             // Coordinates of results centre point.
-    radius: '10',                                                           // Radius in from results centre point.
-    query: ['winningSegment.text'],                                                       // Text to be searched.
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
-}
-
-function callback(results, status) {                                        
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < 5; i++) {
-      var place = results[i];                                               // For loop through results.
-      createMarker(results[i]);                                             // Add maker for each result.
-      console.log(results[i]);                                              // Log results to console.                                    
-    }
-  }
-}
-  
-
- 
- function createMarker(place) {
-
-    new google.maps.Marker({
-        position: place.location,
-        map: map,
-    });
-}
-
-
-
     let theWheel = new Winwheel({
                 'numSegments' : 6,                              // Number of segments.
                 'textAlignment'  : 'centre',                     // Text alignment.
