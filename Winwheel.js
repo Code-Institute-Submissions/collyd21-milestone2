@@ -726,7 +726,6 @@ Winwheel.prototype.drawSegmentText = function()
         let fillStyle;
         let strokeStyle;
         let lineWidth;
-        let fontSetting;
 
         // Get the centerX and centerY scaled with the scale factor, also the same for outer and inner radius.
         let centerX = (this.centerX * this.scaleFactor);
