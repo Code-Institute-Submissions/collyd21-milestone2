@@ -3,9 +3,8 @@
 
     <head>
         <title>Takeaway Decider Wheel</title>
-        <script src='wheelSpin.js'></script>
-        <script src='map.js'></script>
         <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
+        <script src='map.js'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPcrRN_742uhAH7bk9OoyyyANfHWOP7uQ&libraries=geometry,places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -22,60 +21,22 @@
             </canvas> 
         </div>
         </div>
-        </div> <!-- Column 2-->
+        </div> 
     <div class="container">
   <div class="row">
     <div class="text-center col-12">
     <button class="btn btn-success" id="spinButton" style="display: inline" onClick="spinClick();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
     <div class="text-center col-12">
     <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
-    </div> <!-- Column 3-->
-        </div> <!-- Row 1-->
+    </div> 
+        </div> 
         </div>
-        </div> <!-- Container 1-->    
+        </div>     
         <div class="container-fluid map-container">
         <div class="row">
-        <div class="col-12" id="map" style="display: none;"></div>     <!-- Column 4-->
-        </div> <!-- Row 2-->
-        </div> <!-- Container 2-->
-        
-        <script>
-        var theWheel = new Winwheel({
-                'numSegments' : 6,                              // Number of segments.
-                'textAlignment'  : 'centre',                     // Text alignment.
-                'textMargin' : 0,
-                'outerRadius'   : 300,                          // Radius of outer circle.
-                'pointerAngle' : 90,                            // Degree angle that pointer sits at.
-                'innerRadius'   : 40,                           // Radius of inner circle.
-                'textFontSize'  : 40,
-                'segments'    :                                 // Individual segment styling.
-                [
-                    {'fillStyle' : '#eeefff', 'text' : 'Burger'},
-                    {'fillStyle' : '#89f26e', 'text' : 'Italian Food'},
-                    {'fillStyle' : '#7de6ef', 'text' : 'Thai'},
-                    {'fillStyle' : '#e7706f', 'text' : 'Chinese'},
-                    {'fillStyle' : '#eff111', 'text' : 'Indian'},
-                    {'fillStyle' : '#e77811', 'text' : 'Pizza'}
-                ],
-               'pins' :    // Specify pin parameters.
-        {
-            'number'      : 24,  // Number of pins.
-            'outerRadius' : 8,  // Radius of each pin.
-            'margin'      : 10,  // Margin ofpin from edge of wheel.
-            'fillStyle'   : '#636363', // Fill colour of pin.
-            'strokeStyle' : '#ffffff' // Border colour of pin.
-        },
-            'animation' :
-            {
-        'type'     : 'spinToStop',  // Animation set to spin and then stop.
-        'duration' : 4,             // Animation  time in seconds.
-        'spins'    : 6,              // Number of complete revolutions of the wheel.
-        'callbackFinished' : 'winAnimation()' // After spinning finishes, play winning animation & display map
-        
-        }
-    });
-    </script>
-
-        
+        <div class="col-12" id="map" style="display: none;"></div>     
+        </div> 
+        </div> 
+        <script src='wheelSpin.js'></script>  
     </body>
 </html>

@@ -1,4 +1,39 @@
-function spinClick(){
+ var theWheel = new Winwheel({
+                'numSegments' : 6,                              // Number of segments.
+                'textAlignment'  : 'centre',                     // Text alignment.
+                'textMargin' : 0,
+                'outerRadius'   : 300,                          // Radius of outer circle.
+                'pointerAngle' : 90,                            // Degree angle that pointer sits at.
+                'innerRadius'   : 40,                           // Radius of inner circle.
+                'textFontSize'  : 40,
+                'segments'    :                                 // Individual segment styling.
+                [
+                    {'fillStyle' : '#eeefff', 'text' : 'Burger'},
+                    {'fillStyle' : '#89f26e', 'text' : 'Italian Food'},
+                    {'fillStyle' : '#7de6ef', 'text' : 'Thai'},
+                    {'fillStyle' : '#e7706f', 'text' : 'Chinese'},
+                    {'fillStyle' : '#eff111', 'text' : 'Indian'},
+                    {'fillStyle' : '#e77811', 'text' : 'Pizza'}
+                ],
+               'pins' :    // Specify pin parameters.
+        {
+            'number'      : 24,  // Number of pins.
+            'outerRadius' : 8,  // Radius of each pin.
+            'margin'      : 10,  // Margin ofpin from edge of wheel.
+            'fillStyle'   : '#636363', // Fill colour of pin.
+            'strokeStyle' : '#ffffff' // Border colour of pin.
+        },
+            'animation' :
+            {
+        'type'     : 'spinToStop',  // Animation set to spin and then stop.
+        'duration' : 4,             // Animation  time in seconds.
+        'spins'    : 6,              // Number of complete revolutions of the wheel.
+        'callbackFinished' : 'winAnimation()' // After spinning finishes, play winning animation & display map
+        
+        }
+    });
+    
+       function spinClick(){
 spinToggle();
 theWheel.startAnimation();
 }
