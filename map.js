@@ -18,21 +18,15 @@ function success(position) {
                 var userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); // Define the coordinates
 
                 var mapOptions = {
-                    zoom: 13,
+                    zoom: 15,
                     center: userLatLng,
                 };
 
                 map = new google.maps.Map(document.getElementById("map"), mapOptions);  // Create the map
 
-                homeMarker =  new google.maps.Marker({                               // Place the initial marker
-                    position: userLatLng,
-                    map: map,
-                    title: "Your current location!"
-                });
-
                 var request = {
     location: userLatLng,
-    radius: '50',
+    radius: '10',
     query: [winningSegment.text]
   };
 
@@ -42,22 +36,22 @@ function success(position) {
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < 3; i++) {
-       var place = results[i];
+    for (var i = 0; i < 5; i++) {
+    let place = results[i];
       console.log(place);
       console.log(results[i].name);
      marker = new google.maps.Marker({
         position: place.geometry.location,
-        map: map
+        map: map,
+        name: results[i].name
     });
-    var infowindow = new google.maps.InfoWindow
-      ({content: "<b>" + place.name + "</b>" + "<br>" + "<b>Address: </b>" + place.formatted_address + "<br>" + "<b>Rating: </b>" + place.rating});
+    var infowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', (function(_marker, _i) {
+     return function() {
+  infowindow.setContent("<b>" + place.name + "</b>" + "<br>" + "<b>Address: </b>" + place.formatted_address + "<br>" + "<b>Rating: </b>" + place.rating);
+  infowindow.open(map, this);}
+})(marker, i));
     }
-    google.maps.event.addListener(marker, 'click', function() {
-  infowindow.open(map,this);
-});
-    }
-  
 }
 }
-
+}
