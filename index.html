@@ -13,23 +13,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
-        
-        <div class="container">
+        <div class="container-fluid no-gutters canvasBack">
   <div class="row">
-    <div id="wheelCol" class="col-12">
-        <canvas id="canvas" width="620" height="620"> 
+    <div id="wheelCol" class="col-12 text-center">
+        <canvas id="canvas" width="620" height="640"> 
             </canvas> 
         </div>
         </div>
-        </div> 
-    <div class="container">
-  <div class="row">
-    <div class="text-center col-12">
+    <div class="text-center buttonCol">
     <button class="btn btn-success" id="spinButton" style="display: inline" onClick="spinClick();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
-    <div class="text-center col-12">
+    <div class="text-center buttonCol">
     <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
     </div> 
-        </div> 
         </div>
         </div>     
         <div class="container-fluid map-container">

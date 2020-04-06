@@ -28,7 +28,7 @@ function success(position) {
     location: userLatLng,
     radius: '10',
     query: [winningSegment.text]
-  };
+  }; 
 
     service = new google.maps.places.PlacesService(map);
   service.textSearch(request, callback);

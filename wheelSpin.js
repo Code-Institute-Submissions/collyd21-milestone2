@@ -5,11 +5,12 @@
                 'outerRadius'   : 300,                          // Radius of outer circle.
                 'pointerAngle' : 90,                            // Degree angle that pointer sits at.
                 'innerRadius'   : 40,                           // Radius of inner circle.
+                'responsive'     : true,
                 'textFontSize'  : 40,
                 'segments'    :                                 // Individual segment styling.
                 [
                     {'fillStyle' : '#eeefff', 'text' : 'Burger'},
-                    {'fillStyle' : '#89f26e', 'text' : 'Italian Food'},
+                    {'fillStyle' : '#89f26e', 'text' : 'Italian'},
                     {'fillStyle' : '#7de6ef', 'text' : 'Thai'},
                     {'fillStyle' : '#e7706f', 'text' : 'Chinese'},
                     {'fillStyle' : '#eff111', 'text' : 'Indian'},
@@ -32,7 +33,7 @@
         
         }
     });
-    
+
        function spinClick(){
 spinToggle();
 theWheel.startAnimation();
@@ -52,6 +53,7 @@ function spinToggle(){                                                        //
             winningSegment = theWheel.getIndicatedSegment();                // Get the text of the winning segment.
             var winningSegmentNumber = theWheel.getIndicatedSegmentNumber();    // Get the number of the winning segment.
  
+
             for (var i = 1; i < theWheel.segments.length; i ++) 
             {
                 theWheel.segments[i].fillStyle = 'grey';                     // For loop and change fillStyle of all segments to grey.
@@ -60,6 +62,8 @@ function spinToggle(){                                                        //
             theWheel.segments[winningSegmentNumber].fillStyle = 'gold';     // Change winning segment colour.
             theWheel.pins.fillStyle   = '#97EFE9';
             theWheel.draw();                                                // Call draw function to render changes.
+            if (winningSegment.text === "Italian") {                        // If statement to add "food" to end of result.
+            winningSegment.text = "Italian food";}
             reset();
             mapView();
             mapSearch();
@@ -84,6 +88,7 @@ function reset() {                                                        // Res
             theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
             theWheel.segments[1].fillStyle = '#eeefff';
             theWheel.segments[2].fillStyle = '#89f26e';
+            theWheel.segments[2].text = 'Italian';
             theWheel.segments[3].fillStyle = '#7de6ef';
             theWheel.segments[4].fillStyle = '#e7706f';
             theWheel.segments[5].fillStyle = '#eff111';
