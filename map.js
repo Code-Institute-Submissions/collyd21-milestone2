@@ -43,7 +43,6 @@ function callback(results, status) {
      marker = new google.maps.Marker({
         position: place.geometry.location,
         map: map,
-        name: results[i].name
     });
     var infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(marker, 'click', (function(_marker, _i) {
