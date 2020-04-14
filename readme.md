@@ -8,7 +8,7 @@ I wanted this site to be very easy to use and navigate, so I achieved this by st
 ### Scope
 The premise behind this project is the reason I started the Code Institute course in the first place. I had an idea for this project and was almost going to pay a freelance web designer to make it for me. I want to make my ideas reality and make them myself. The idea is to take the dreaded couples discussion and indecisiveness of choosing what to eat and have someone, well, something to make that decision for you. And so, the Takeaway Decider is born.
 ### Skeleton
-For this project I didn’t have a mock up in mind. All that I knew was that I wanted the wheel in the centre of the screen. And it was formed from there
+[Wireframe](assets/images/wireframe.pdf)
 ### Surface
 The colour scene for this project is bright and vibrant colours for the wheel itself to stand out. I then released I wanted to go down the gameshow type route so added the background further into the project. When the winning segment shows the losing ones are greyed and chosen segment highlighted in winning gold.
 ## Technologies
@@ -42,6 +42,7 @@ Map | The wheel does not appear on mobile when used with safari | I have researc
 winWheel | When I put the script for the wheel into its own js file it would not draw the wheel and showed a blank canvas container | I had to move the script file link  into the body after the canvas container and the wheel would draw then
 Reset Button | When spin button is clicked and wheel rotates, no reset button appears when animation finishes | display for reset was set to block and had to be set to inline
 
+I also use the Google Dev Tools, (right-click and inspect). During the course of building this project I continually console.log bits of information to confirm they were read correct. It helped greatly in troubleshooting issues and bugs.
 ## Deployment
 A live demo can be found here [Takeaway Decider Wheel](https://collyd21.github.io/milestone2/).
 

@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <title>Takeaway Decider Wheel</title>
-        <script src='Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
-        <script src='map.js'></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPcrRN_742uhAH7bk9OoyyyANfHWOP7uQ&libraries=geometry,places"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <div class="container-fluid no-gutters canvasBack">
-  <div class="row">
-    <div id="wheelCol" class="col-12 text-center">
-        <canvas id="canvas" width="620" height="645"> 
-            </canvas> 
-        </div>
-        </div>
-    <div class="text-center buttonCol">
-    <button class="btn btn-success" id="spinButton" style="display: inline" onClick="spinClick();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
-    <div class="text-center buttonCol">
-    <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
-    </div> 
-        </div>
-        </div>     
-        <div class="container-fluid map-container">
-        <div class="row">
-        <div class="col-12" id="map" style="display: none;"></div>     
-        </div> 
-        </div> 
-        <script src='wheelSpin.js'></script>  
-    </body>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Takeaway Decider Wheel</title>
+      <script src='assets/js/Winwheel.js'></script> <!-- script library for Winwheel from http://dougtesting.net/ -->
+      <script src='assets/js/map.js'></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script> <!-- Use of Greenstock Animation Platform from https://greensock.com/ -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPcrRN_742uhAH7bk9OoyyyANfHWOP7uQ&libraries=geometry,places"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="/assets/css/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   </head>
+   <body>
+      <div class="container-fluid no-gutters canvasBack">
+         <div class="row">
+            <div id="wheelCol" class="col-12 text-center">
+               <canvas id="canvas" width="620" height="645"> 
+               </canvas>
+            </div>
+         </div>
+         <div class="text-center buttonCol">
+            <button class="btn btn-success" id="spinButton" style="display: inline" onClick="spinClick();">Spin the Wheel</button> <!-- Spin wheel by calling startAnimation, initMap function and spinClick function --> 
+            <div class="text-center buttonCol">
+               <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
+            </div>
+         </div>
+      </div>
+      <div class="container-fluid map-container">
+         <div class="row">
+            <div class="col-12" id="map" style="display: none;"></div>
+         </div>
+      </div>
+      <script src='assets/js/wheelSpin.js'></script>  
+   </body>
 </html>
