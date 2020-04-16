@@ -13,14 +13,19 @@ The premise behind this project is the reason I started the Code Institute cours
 The colour scene for this project is bright and vibrant colours for the wheel itself to stand out. I then released I wanted to go down the gameshow type route so added the background further into the project. When the winning segment shows the losing ones are greyed and chosen segment highlighted in winning gold.
 ## Technologies
 For this project I used the following technologies:
-Git
-Github
-HTML
-CSS
-Bootstrap
-Javascript
-Google Maps API integration
-WinWheel Library
+
+[Github](https://github.com/)
+
+[Github Pages](https://pages.github.com/)
+
+HTML, CSS and Javascript from various sources including [Code Institute](https://codeinstitute.net/), [W3schools](https://www.w3schools.com/html/), [Slack](https://slack.com/intl/en-ie/).
+
+[Bootstrap](https://getbootstrap.com/)
+
+[Google Maps API integration](https://developers.google.com/maps/documentation/javascript/tutorial)
+
+[WinWheel Library]((http://dougtesting.net/home))
+
 ## Features
 Firstly, I found the winWheel library online at [DougTesting](http://dougtesting.net/home). I had been researching how to make a wheel of fortune type wheel. This really is an excellent library and also the tutorials of all features of the wheel were so easy to follow. It is an excellent piece of coding in my opinion.
 
