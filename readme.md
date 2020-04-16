@@ -24,7 +24,7 @@ HTML, CSS and Javascript from various sources including [Code Institute](https:/
 
 [Google Maps API integration](https://developers.google.com/maps/documentation/javascript/tutorial)
 
-[WinWheel Library]((http://dougtesting.net/home))
+[WinWheel Library](http://dougtesting.net/home)
 
 ## Features
 Firstly, I found the winWheel library online at [DougTesting](http://dougtesting.net/home). I had been researching how to make a wheel of fortune type wheel. This really is an excellent library and also the tutorials of all features of the wheel were so easy to follow. It is an excellent piece of coding in my opinion.
