@@ -1,6 +1,76 @@
-// Variable to draw the Spinning Wheel
-var theWheel = new Winwheel({
-	'numSegments': 6, // Number of segments.
+screenCheck();
+
+function screenCheck() {
+if (window.innerWidth > 440) {
+		largeScreen();
+	} else {
+		smallScreen();
+    }
+    
+}
+
+// Function to call if screen is large
+function smallScreen() {
+    // Variable to draw the Spinning Wheel
+theWheel = new Winwheel({
+    'numSegments': 6, // Number of segments.
+	'textAlignment': 'centre',
+	'textMargin': 0,
+	'outerRadius': 280, // Radius of outer circle.
+	'pointerAngle': 90, // Degree angle that pointer sits at.
+	'innerRadius': 40, // Radius of inner circle.
+	'responsive': true,
+	'textFontSize': 35,
+	'segments': // Individual segment styling.
+		[{
+				'fillStyle': '#eeefff',
+				'text': 'Burger'
+			},
+			{
+				'fillStyle': '#89f26e',
+				'text': 'Italian'
+			},
+			{
+				'fillStyle': '#7de6ef',
+				'text': 'Thai'
+			},
+			{
+				'fillStyle': '#e7706f',
+				'text': 'Chinese'
+			},
+			{
+				'fillStyle': '#eff111',
+				'text': 'Indian'
+			},
+			{
+				'fillStyle': '#e77811',
+				'text': 'Pizza'
+			}
+		],
+	'pins': // Specify pin parameters.
+	{
+		'number': 24, // Number of pins.
+		'outerRadius': 4, // Radius of each pin.
+		'margin': 6, // Margin ofpin from edge of wheel.
+		'fillStyle': '#636363', // Fill colour of pin.
+		'strokeStyle': '#ffffff' // Border colour of pin.
+	},
+	'animation': {
+		'type': 'spinToStop', // Animation set to spin and then stop.
+		'duration': 4, // Animation  time in seconds.
+		'spins': 6, // Number of complete revolutions of the wheel.
+		'callbackFinished': 'winAnimation()', // After spinning finishes, play winning animation & display map
+        'callbackAfter' : 'pointerImage()'
+	}
+})
+};
+
+
+// Function to call if screen is large
+function largeScreen() {
+    // Variable to draw the Spinning Wheel
+theWheel = new Winwheel({
+    'numSegments': 6, // Number of segments.
 	'textAlignment': 'centre',
 	'textMargin': 0,
 	'outerRadius': 300, // Radius of outer circle.
@@ -46,10 +116,51 @@ var theWheel = new Winwheel({
 		'type': 'spinToStop', // Animation set to spin and then stop.
 		'duration': 4, // Animation  time in seconds.
 		'spins': 6, // Number of complete revolutions of the wheel.
-		'callbackFinished': 'winAnimation()' // After spinning finishes, play winning animation & display map
-
+		'callbackFinished': 'winAnimation()', // After spinning finishes, play winning animation & display map
+        'callbackAfter' : 'pointerImage()'
 	}
-});
+})
+};
+
+// Function to draw pointer marker image onto the wheel
+function pointerImage(){
+
+let pointerImageSmall = new Image();
+let pointerImageLarge = new Image();
+
+// Set onload of the image to anonymous function to draw on the canvas once the image has loaded.
+pointerImageSmall.onload = function()
+{
+    let pointerCanvas = document.getElementById('canvas');
+    let ctx = pointerCanvas.getContext('2d');
+ 
+    if (ctx && window.innerWidth < 380) {           // Only draw on screens less than 380px width
+        ctx.save();
+        ctx.drawImage(pointerImageSmall, 145, 141);   // Draw the image at the specified x and y.
+        ctx.restore();
+        // var bodyrect = document.body.getBoundingClientRect(),
+        // elemrect = canvas.getBoundingClientRect();
+        // console.log(bodyrect, elemrect);
+        // console.log(elemrect.right - bodyrect.left);
+        // console.log(elemrect.left);
+    }
+    else if (ctx && window.innerWidth > 381 && window.innerWidth < 420){    // Only draw on screens between 381px and 420px width
+        ctx.save();
+        ctx.drawImage(pointerImageSmall, 162, 160);   // Draw the image at the specified x and y.
+        ctx.restore();
+    }
+
+    else if (ctx && window.innerWidth > 421){   // Only draw on screens greater than 421px width
+        ctx.save();
+        ctx.drawImage(pointerImageSmall, 263, 260);   // Draw the image at the specified x and y.
+        ctx.restore();
+    }
+};
+
+// Set source of the images for different size of pointer.
+pointerImageSmall.src = 'assets/images/prizepointersmall.png';
+pointerImageLarge.src = 'assets/images/prizepointerlarge.png';
+}
 
 // Function to activate spininng after button clicked
 function spinClick() {
@@ -60,10 +171,10 @@ function spinClick() {
 // Function to toggle Spin Button on and off
 function spinToggle() {
 	var spin = document.getElementById("spinButton");
-	if (spin.style.display === "inline") {
-		spin.style.display = "none";
+	if (spin.style.visibility === "visible") {
+		spin.style.visibility = "hidden";
 	} else {
-		spin.style.display = "inline";
+		spin.style.visibility = "visible";
 	}
 }
 

@@ -1,22 +1,48 @@
-#canvas {
-	margin-bottom: 10px;
-	background-image: url(../images/p-background.png);
+/*#canvas {
+	/* margin-bottom: 10px;
+    margin-top: 10px; */
+	/* background-image: url(../images/p-background.png);
 	background-repeat: no-repeat;
-	background-position: center;
-}
+	background-position: center; */
+    /* height: 600;
+    width: 600; 
+}*/
 
-.canvasBack {
+  #wheelCol {
+      padding: 0px;
+  }
+
+
+
+   /* background-color: red; 
+	text-align: center;
+	margin-top: 0px;
+    /* max-height: 600px;
+    max-width: 600px; */ 
+/* } */
+
+/* .canvasBack { */
+.backg {
+    /* background-color: red; */
 	background-image: url(../images/GSback.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	width: 100vw;
-	padding-bottom: 0px;
-}
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+	/* width: 100vw; 
+	padding-bottom: 50px;
+    max-height: 600px;
+    max-width: 600px; */ 
+    }
 
-.buttonCol {
+
+/* .buttonCol {
 	padding-top: 0px;
-	padding-bottom: 30px;
-}
+    text-align: center; 
+}*/
 
 #map {
 	height: 600px;
@@ -26,9 +52,4 @@
 .map-container {
 	margin: 0px;
 	padding: 0px;
-}
-
-#wheelCol {
-	text-align: center;
-	margin-top: 0px;
 }

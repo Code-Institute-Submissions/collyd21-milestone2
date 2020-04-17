@@ -39,9 +39,6 @@ function callback(results, status) {
 			var infowindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(marker, 'click', (function (_marker, _i) {
 				return function () {
-					var place;
-					var map;
-					var infowindow;
 					// Info window contents, adds name, address and rating of takeaway
 					infowindow.setContent("<b>" + place.name + "</b>" + "<br>" + "<b>Address: </b>" + place.formatted_address + "<br>" + "<b>Rating: </b>" + place.rating);
 					infowindow.open(map, this); // individual infowindow for particular marker clicked
