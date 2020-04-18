@@ -15,42 +15,35 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
       <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    </head>
+   </head>
    <body>
-    <div class="backg">
-   <nav class="navbar navbar-expand-md">
-        <button class="btn btn-success mx-auto" id="spinButton" style="visibility: visible" onClick="spinClick();">Spin the Wheel</button>
-        <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button>
-        </nav>
-      <div class="container canvasBack">
-         <div class="row">
-            <div id="wheelCol" class="col-12 text-center">
-               <canvas id="canvas" width="620" height="620"> 
-               </canvas>
-             </div>
+      <!-- Overall Background -->
+      <div class="backg">
+         <!-- Navbar -->
+         <nav class="navbar navbar-expand-md">
+            <button class="btn btn-success mx-auto" id="spinButton" style="visibility: visible" onClick="spinClick();">Spin the Wheel</button>
+            <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button>
+         </nav>
+         <!-- Wheel Canvas -->
+         <div class="container canvasBack">
+            <div class="row">
+               <div id="wheelCol" class="col-12 text-center">
+                  <canvas id="canvas" width="620" height="620" data-responsiveMinWidth="180" data-responsiveScaleHeight="true" data-responsiveMargin="50"> 
+                  </canvas>
+               </div>
             </div>
          </div>
-         </div>
-         <!-- <div class="row">
-         <div class="col-12">
-         <div class="text-center buttonCol">
-            <button class="btn btn-success" id="spinButton" style="display: inline" onClick="spinClick();">Spin the Wheel</button>
-            </div>
-            </div>
-            </div>
-            </div> -->
-            <!-- <div class="text-center buttonCol">
-               <button class="btn btn-danger" id="resetButton" style="display: none" onClick="resetWheel();">Reset</button> <!-- Reset wheel calling reset function -->
-            <!-- </div></div></div>
-            </div>
-            </div>
-         </div>
-      </div>  -->
+      </div>
+      <!-- Map -->
       <div class="container-fluid map-container">
          <div class="row">
             <div class="col-12" id="map" style="display: none;"></div>
          </div>
       </div>
-      <script src='assets/js/wheelSpin.js'></script>  
+      <!-- Footer -->
+      <div class="footer">
+         <p>Please allow Location access for map to appear</p>
+      </div>
+      <script src='assets/js/wheelSpin.js'></script>
    </body>
 </html>

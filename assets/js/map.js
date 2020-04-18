@@ -55,7 +55,7 @@ function mapSearch() {
 
 		// Variable for maps options
 		var mapOptions = {
-			zoom: 15, // Zoomed view setting of map
+			zoom: 12, // Zoomed view setting of map
 			center: userLatLng, // Centre map to users coordinates
 		};
 

@@ -40,14 +40,18 @@ The third script is for the map controls. It sets the functions for the map loca
 The last feature is the Google maps places search API. I had little to no experience with APIs before this and this was the part that had me stupted for much of the project. I just could not get it to work as I wanted to. But eventually it clicked and I was able to get the map to search the text keyword from the winning segment. It then uses this keyword to place markers on the map. The radius of this search is set within the second wheel script.
 ## Testing
 There was a massive amount of trial and error with this project. As I am not familiar with either the winWheel library or the Google maps API. 
-Feature | Issues | Resolution
- --- | --- | --- |
-Winning Segment | When ever the keyword “Italian” was entered into the search for the map, it would bring up places related to Italy rather than the food type | I had to use an IF statement in the winAnimation function to change the text to Italian food and search it, but not to change the actually text on the wheel. This had to be done after the theWHeel.draw function so as to not rewrite the text on the wheel
-Map | The wheel does not appear on mobile when used with safari | I have researched this but to no avail, it seems to be an issue with Safari itself as there is many threads regarding this issue and no solution
-winWheel | When I put the script for the wheel into its own js file it would not draw the wheel and showed a blank canvas container | I had to move the script file link  into the body after the canvas container and the wheel would draw then
-Reset Button | When spin button is clicked and wheel rotates, no reset button appears when animation finishes | display for reset was set to block and had to be set to inline
+| Feature | Issues | Resolution |
+| --- | --- | --- |
+| Winning Segment | When ever the keyword “Italian” was entered into the search for the map, it would bring up places related to Italy rather than the food type | I had to use an IF statement in the winAnimation function to change the text to Italian food and search it, but not to change the actually text on the wheel. This had to be done after the theWHeel.draw function so as to not rewrite the text on the wheel |
+| Pointer Image | I could not get the pointer to locate itself into the centre of wheel | I tried multiple options, but the best solution was to draw and image and use the width and height of canvas and divide by 2 for the position. I also had to allow for the size of the pointer image in calculations |
+| winWheel | When I put the script for the wheel into its own js file it would not draw the wheel and showed a blank canvas container | I had to move the script file link  into the body after the canvas container and the wheel would draw then |
+| Reset Button | When spin button is clicked and wheel rotates, no reset button appears when animation finishes | display for reset was set to block and had to be set to inline |
+| Background | When viewed on mobile the background image height was strectched to bottom of screen on some devices | Added in a height responsive parameter to the canvas |
+| Pointer Image | The pointer image is too large on small screens | I added an if statement to draw a smaller image version of the pointer for smaller screen sizes |
 
-I also use the Google Dev Tools, (right-click and inspect). During the course of building this project I continually console.log bits of information to confirm they were read correct. It helped greatly in troubleshooting issues and bugs.
+I use the Google Dev Tools, (right-click and inspect). During the course of building this project I continually console.log bits of information to confirm they were read correctly. It helped greatly in troubleshooting issues and bugs.
+
+I also used [Responsinator](http://www.responsinator.com/), a free online tool for checking how your site will look and operate on different types of mobile devices. I prefer this to the Chrome DevTools option.
 ## Deployment
 A live demo can be found here [Takeaway Decider Wheel](https://collyd21.github.io/milestone2/).
 
